@@ -1,20 +1,12 @@
-# Data processing 
-pandas
-numpy
-
-# Web UI (optional)
-streamlit
-
-# Development tools
-pytest
-black
-isort
-pylint
-python-dotenv
-
-# Craw AI
-crewai
-crewai-tools
-duckduckgo-search
-langchain-openai 
-langchain-community
+black==25.1.0
+crewai==0.114.0
+crewai-tools==0.40.1
+isort==6.0.1
+langchain-community==0.3.19
+langchain-openai==0.2.14
+numpy==2.2.4
+pandas==2.0.3
+pylint==3.3.6
+pytest==8.3.5
+python-dotenv==1.0.1
+streamlit==1.43.2
