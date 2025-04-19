@@ -14,3 +14,6 @@ python-dotenv
 
 # Craw AI
 crewai
+crewai-tools
+langchain-openai
+duckduckgo-search
