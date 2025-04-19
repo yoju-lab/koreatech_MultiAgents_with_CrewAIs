@@ -17,13 +17,6 @@ class MyCustomDuckDuckGoTool(BaseTool):
         response = duckduckgo_tool.invoke(query)
         return response
 
-# .env 파일 로드하여 OPENAI_API_KEY 등 환경변수 설정
-load_dotenv()
-
-# LLM 초기화 (OpenAI GPT-4o-mini 모델 사용)
-openai_model = os.getenv('OPENAI_MODEL')
-llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.7)
-
 class WebScraperTool(BaseTool):
     name: str = "웹 스크래퍼"
     description: str = "웹페이지 내용을 추출합니다."
