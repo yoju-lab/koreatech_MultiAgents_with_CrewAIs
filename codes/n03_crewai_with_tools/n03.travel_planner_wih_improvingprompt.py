@@ -52,39 +52,41 @@ research_task = Task(
     description=(
         "{place} 여행을 위해 알아야 할 핵심 정보를 조사하세요.\n"
         "{place}의 인기 관광지 목록, 지역별 맛집 추천, 이동 시 유용한 교통 정보 등을 최신 자료를 기반으로 정리해 주세요."
+        "검색 주제와 링크를 꼭 포함해 주세요.\n"
     ),
     agent=research_agent,
     expected_output="{place} 여행에 대한 요약 정보 목록"
 )
 
-# 일정 작성 Task 정의 (이전 Task 결과를 context로 활용)
-planning_task = Task(
+# 개선된 일정 작성 Task 정의 (예산 및 교통 고려 추가)
+improved_planning_task = Task(
     description=(
         "위의 조사 결과를 참고하여 {place}에서 {days}일 동안 머무는 여행 일정을 작성해 주세요.\n"
         "각 날짜별로 오전/오후/저녁 계획을 세우고, 조사된 관광지와 맛집 정보를 일정에 반영하세요.\n"
-        "일정에는 방문지에 대한 간단한 설명이나 여행 팁도 포함해 주세요."
+        "가능하면 **예산은 하루 {budget_per_day}만원 내외로 맞추고, 이동은 모두 대중교통**을 이용하는 것으로 고려하세요.\n"
+        "버스정류장 및 지하철역을 포함한 대중교통 경로를 제안해 주세요.\n"
+        "버스 및 지하철을 이용할 때의 소요 시간도 포함해 주세요.\n"
+        "일정에는 방문지에 대한 간단한 설명이나 여행 팁도 포함해 주세요. 결과는 한국어로 작성해 주세요.\n"
+        "참조한 검색 정보 출처 링크를 꼭 포함해 주세요.\n"
     ),
     agent=planner_agent,
-    context=[research_task],  # 이전 조사 결과를 컨텍스트로 전달
-    # expected_output="조사된 정보를 반영한 3일간의 여행 일정"
-    expected_output="조사된 정보를 반영한 {days}일간의 여행 일정을 한국어로 작성"
+    context=[research_task],
+    expected_output="예산과 교통을 고려한 {days}일간의 여행 일정"
 )
 
-# 두 에이전트를 Crew로 묶어 순차 실행
-crew_multi = Crew(
+crew_multi_improved = Crew(
     agents=[research_agent, planner_agent],
-    tasks=[research_task, planning_task],
+    tasks=[research_task, improved_planning_task],
     process=Process.sequential,
     verbose=True
 )
 
+# 여행지와 예산 설정
 inputs = {
-    'place' : "코타키나바루 in 말레이시아",
-    'days' : "2"
+    "place": "목표", "days": 2, "budget_per_day": 15
 }
-print(f"\n=== [협업 에이전트] {inputs['place']} {inputs['days']}일 일정 생성 시작 ===")
-result_multi = crew_multi.kickoff(inputs=inputs)
-print(f"=== [협업 에이전트] 생성된 {inputs['place']} {inputs['days']}일 일정 ===")
-print(result_multi)
 
-
+print("\n=== [협업 에이전트] 개선된 프롬프트로 일정 생성 ===")
+result_multi_improved = crew_multi_improved.kickoff(inputs=inputs)
+print("=== [협업 에이전트] 개선된 일정 결과 ===")
+print(result_multi_improved)
