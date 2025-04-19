@@ -8,6 +8,8 @@ RUN apt-get update && apt-get install -y \
     sudo \
     && rm -rf /var/lib/apt/lists/*
 
+RUN wget -qO- https://astral.sh/uv/install.sh | sh
+
 # 작업 디렉토리 설정
 WORKDIR /apps
 

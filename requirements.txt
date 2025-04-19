@@ -1,7 +1,6 @@
 # Data processing 
 pandas
 numpy
-sqlite3
 
 # Web UI (optional)
 streamlit
@@ -14,4 +13,4 @@ pylint
 python-dotenv
 
 # Craw AI
-crawai
+crewai

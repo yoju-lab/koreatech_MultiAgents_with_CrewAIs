@@ -1,0 +1,23 @@
+[project]
+name = "n02_install_crewais"
+version = "0.1.0"
+description = "n02_install_crewais using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "crewai[tools]>=0.114.0,<1.0.0"
+]
+
+[project.scripts]
+n02_install_crewais = "n02_install_crewais.main:run"
+run_crew = "n02_install_crewais.main:run"
+train = "n02_install_crewais.main:train"
+replay = "n02_install_crewais.main:replay"
+test = "n02_install_crewais.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"
