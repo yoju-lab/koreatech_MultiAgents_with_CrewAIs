@@ -6,4 +6,5 @@ pandas
 pytest
 python-dotenv
 streamlit
-# pysqlite3-binary
+pysqlite3-binary
+chromadb
