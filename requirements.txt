@@ -1,5 +1,8 @@
-crewai-tools~=0.40.1
-langchain-community~=0.3.19
-pytest>=8.3.5
-python-dotenv~=1.0.1
-streamlit~=1.43.2
+langchain-community
+langchain-openai
+crewai
+crewai-tools
+pandas
+pytest
+python-dotenv
+streamlit

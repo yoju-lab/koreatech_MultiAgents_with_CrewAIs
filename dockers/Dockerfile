@@ -1,4 +1,4 @@
-FROM python:3.13
+FROM python:3.11
 
 # 기본 도구 설치
 RUN apt-get update && apt-get install -y \
